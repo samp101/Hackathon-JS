@@ -43,7 +43,9 @@ for (let index = 1; index < daysInMonth+1; index++) {
     td.setAttribute('id','day'+index) 
     let formSpan = document.createElement('span')
     formSpan.classList.add('formButton')
-    formSpan.textContent = 'sh'
+    let plusPng = document.createElement('img')
+    plusPng.src = './Static/Plus.png'
+    formSpan.append(plusPng)
     td.append(formSpan)
     tr.append(td)
     
