@@ -1,5 +1,6 @@
 let calContainer = document.querySelector('#calendarContainer')
 let cardsContainer = document.querySelector('#cardsNew')
+let monthHTML = document.querySelector('#date-string')
 
 
 let table = document.createElement('table')
@@ -13,7 +14,12 @@ let daysInMonth = new Date(year,month,0).getDate()
 
 console.log(date.setDate(date.getDate()+1))
 
+let pTagWithDate = document.createElement('h2')
 
+let myDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
+pTagWithDate.innerHTML = myDate
+
+monthHTML.append(pTagWithDate)
 let bDaySelected, anniversarySelected
 
 
@@ -49,6 +55,7 @@ for (let index = 1; index < daysInMonth+1; index++) {
     let formSpan = document.createElement('span')
     formSpan.classList.add('formButton')
     let plusPng = document.createElement('img')
+    plusPng.classList.add('showForm')
     plusPng.src = './Static/Plus.png'
 
     let inputContainer = document.createElement('div')
@@ -71,12 +78,12 @@ for (let index = 1; index < daysInMonth+1; index++) {
 
 
     let input = document.createElement('input')
-    input.setAttribute('id',`userInput+${index}`)
+    input.setAttribute('id',`userInput${index}`)
     input.classList.add(`userInput`)
     input.type = 'text'
 
-    inputContainer.append(input,BdayPng,anniversaryPng)
-    form.append(inputContainer)
+    form.append(input,BdayPng,anniversaryPng)
+    inputContainer.append(form)
     formSpan.append(plusPng,form)
     td.append(formSpan)
     tr.append(td)
@@ -103,6 +110,7 @@ table.append(tr)
 calContainer.append(table)
 
 
+let userInput = document.querySelector('#userInput6')
 let annivAll = document.querySelectorAll('.b-day-submit')
 let bdayAll = document.querySelectorAll('.anniv-submit')
 let formButton = document.querySelectorAll('.formButton')
@@ -120,19 +128,64 @@ annivAll.forEach(element=>
 )
 
 function createBdayCard(e) {
-    
-    let specificDay = e.target.parentElement.parentElement
+    e.preventDefault()
+    let specificDay = e.target.parentElement.parentElement.parentElement
+    console.log(specificDay)
 
     let userInfoContainer = document.createElement('div')
     userInfoContainer.setAttribute('id','card1')
+
     let userText = document.createElement('span')
-    userText.textContent =  e.target.value
-    userInfoContainer.append(userText)
+    
+    userText.textContent = this.parentElement.firstChild.value
+    
+    let imgEvent  = document.createElement('img')
+    imgEvent.src = this.src
+
+    let deleteCard = document.createElement('img')
+    deleteCard.src ='./Static/Delete.png'
+    deleteCard.addEventListener('click',remove_div)
+    
+    // let editCard = document.createElement('img')
+    // editCard.src ='./Static/Edit.png'
+    // editCard.addEventListener('click',edit)
+    
+    
+    userInfoContainer.append(imgEvent,userText,deleteCard)
     specificDay.append(userInfoContainer)
 }
 
 
+function remove_div(){
+    this.parentElement.remove();
+  }
+// function edit(){
+//     console.log(this.parentElement)
+//     let a = this.parentElement
+//     a.innerHTML =''
+//     let b = document.createElement('input')
+//     let b = document.createElement('input')
+//     a.append(b)
+//     b.value 
+//     a.append(b.value)
+// }
 
-function occasionSelect(){
+let showForm = document.querySelectorAll('.showForm')
+let form = document.querySelectorAll('form')
 
-}
+
+// console.log(showForm)
+// let form = document.querySelector('form')
+// showForm.addEventListener('click',()=>{
+//     form.style.display = 'visible'
+// })
+showForm.forEach(element=>{
+    element.addEventListener('click',reveal)})
+
+function reveal(element){
+        if(element.target.nextElementSibling.style.display = 'none'){
+            element.target.nextElementSibling.style.display ='unset' 
+        } else{
+            alert('je')
+            element.target.nextElementSibling.style.display = 'none'}
+    }
