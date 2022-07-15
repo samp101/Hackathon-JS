@@ -1,0 +1,69 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif, Arial;
+
+}
+
+.formButton {
+
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top: 85px;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+
+#calendarContainer {
+    padding-top: 50px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+
+}
+
+table {
+    width: 80vw;
+    height: 90vh;
+    background-color: #03a9f4;
+    box-shadow: 0 0 10px 5px rgb(90, 90, 90);
+}
+
+td {
+    vertical-align: top;
+}
+
+.day.box {
+
+    color: #01569b;
+    background-color: #c7e5fd;
+    transition: 0.2s ease-in-out;
+}
+
+.day.box {
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.day.box:hover {
+    box-shadow: 0 0 10px 1px rgb(90, 90, 90);
+    background-color: #8dccff;
+    cursor: auto;
+
+}
+
+.day.box:hover .formButton {
+    visibility: visible;
+}
+
+.box {
+
+    background-color: #ffd0d0;
+}
+
+.box:hover {
+    cursor: not-allowed;
+}
