@@ -1,4 +1,5 @@
 let calContainer = document.querySelector('#calendarContainer')
+let cardsContainer = document.querySelector('#cardsNew')
 
 
 let table = document.createElement('table')
@@ -11,6 +12,9 @@ let dayMonthStart = date.getDay()
 let daysInMonth = new Date(year,month,0).getDate()
 
 console.log(date.setDate(date.getDate()+1))
+
+
+let bDaySelected, anniversarySelected
 
 
 
@@ -41,11 +45,39 @@ for (let index = 1; index < daysInMonth+1; index++) {
     td.innerHTML = index
     td.classList.add('day','box')
     td.setAttribute('id','day'+index) 
+
     let formSpan = document.createElement('span')
     formSpan.classList.add('formButton')
     let plusPng = document.createElement('img')
     plusPng.src = './Static/Plus.png'
-    formSpan.append(plusPng)
+
+    let inputContainer = document.createElement('div')
+
+
+    let form = document.createElement('form')
+    form.classList.add('form')
+    
+    
+    let BdayPng = document.createElement('input')
+    BdayPng.classList.add('b-day-submit')
+    BdayPng.type = 'image'
+    BdayPng.src = './Static/Birthday-cake.png'
+    
+    
+    let anniversaryPng = document.createElement('input')
+    anniversaryPng.classList.add('anniv-submit')
+    anniversaryPng.type = 'image'
+    anniversaryPng.src = './Static/Growing-heart.png'
+
+
+    let input = document.createElement('input')
+    input.setAttribute('id',`userInput+${index}`)
+    input.classList.add(`userInput`)
+    input.type = 'text'
+
+    inputContainer.append(input,BdayPng,anniversaryPng)
+    form.append(inputContainer)
+    formSpan.append(plusPng,form)
     td.append(formSpan)
     tr.append(td)
     
@@ -70,11 +102,37 @@ if(count>35){
 table.append(tr)
 calContainer.append(table)
 
+
+let annivAll = document.querySelectorAll('.b-day-submit')
+let bdayAll = document.querySelectorAll('.anniv-submit')
 let formButton = document.querySelectorAll('.formButton')
+console.log(annivAll)
 formButton.forEach(element=>{
-element.addEventListener('click',()=>alert('hello'))
+// element.addEventListener('click',()=>alert('hello'))
 })
-function createBdayCard() {
-    day.add
+
+
+bdayAll.forEach(element=>
+    element.addEventListener('click',createBdayCard)
+)
+annivAll.forEach(element=>
+    element.addEventListener('click',createBdayCard)
+)
+
+function createBdayCard(e) {
     
+    let specificDay = e.target.parentElement.parentElement
+
+    let userInfoContainer = document.createElement('div')
+    userInfoContainer.setAttribute('id','card1')
+    let userText = document.createElement('span')
+    userText.textContent =  e.target.value
+    userInfoContainer.append(userText)
+    specificDay.append(userInfoContainer)
+}
+
+
+
+function occasionSelect(){
+
 }
