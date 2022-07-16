@@ -79,14 +79,16 @@ form.form {
 
     display: inline-block;
     line-height: 1;
+    visibility: hidden;
 }
 
 .userInput {
     width: 100px;
 }
 
-#card1 {
+.card1 {
     position: relative;
     bottom: 25px;
     font-size: 12px;
+    border: 1px solid black;
 }

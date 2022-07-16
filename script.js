@@ -69,12 +69,14 @@ for (let index = 1; index < daysInMonth+1; index++) {
     BdayPng.classList.add('b-day-submit')
     BdayPng.type = 'image'
     BdayPng.src = './Static/Birthday-cake.png'
+    BdayPng.required = true;
     
     
     let anniversaryPng = document.createElement('input')
     anniversaryPng.classList.add('anniv-submit')
     anniversaryPng.type = 'image'
     anniversaryPng.src = './Static/Growing-heart.png'
+    anniversaryPng.required = true;
 
 
     let input = document.createElement('input')
@@ -114,7 +116,6 @@ let userInput = document.querySelector('#userInput6')
 let annivAll = document.querySelectorAll('.b-day-submit')
 let bdayAll = document.querySelectorAll('.anniv-submit')
 let formButton = document.querySelectorAll('.formButton')
-console.log(annivAll)
 formButton.forEach(element=>{
 // element.addEventListener('click',()=>alert('hello'))
 })
@@ -131,9 +132,12 @@ function createBdayCard(e) {
     e.preventDefault()
     let specificDay = e.target.parentElement.parentElement.parentElement
     console.log(specificDay)
+    console.log(e.target)
+
+    e.target.setAttribute('required', '') 
 
     let userInfoContainer = document.createElement('div')
-    userInfoContainer.setAttribute('id','card1')
+    userInfoContainer.classList.add('card')
 
     let userText = document.createElement('span')
     
@@ -146,10 +150,10 @@ function createBdayCard(e) {
     deleteCard.src ='./Static/Delete.png'
     deleteCard.addEventListener('click',remove_div)
     
-    // let editCard = document.createElement('img')
-    // editCard.src ='./Static/Edit.png'
-    // editCard.addEventListener('click',edit)
-    
+    this.parentElement.firstChild.value = ''
+    let formDiv = this.parentElement
+    formDiv.style.visibility = 'hidden' 
+
     
     userInfoContainer.append(imgEvent,userText,deleteCard)
     specificDay.append(userInfoContainer)
@@ -183,9 +187,19 @@ showForm.forEach(element=>{
     element.addEventListener('click',reveal)})
 
 function reveal(element){
-        if(element.target.nextElementSibling.style.display = 'none'){
-            element.target.nextElementSibling.style.display ='unset' 
-        } else{
-            alert('je')
-            element.target.nextElementSibling.style.display = 'none'}
+    
+        if(element.target.nextElementSibling.style.visibility == 'visible'){
+            // element.target.style.visibility = 'hidden'
+            element.target.nextElementSibling.style.visibility ='hidden' 
+        } else {element.target.nextElementSibling.style.visibility == 'hidden'
+        // element.target.style.visibility = 'visible'
+            element.target.nextElementSibling.style.visibility  = 'visible'}
     }
+
+document.addEventListener('click', function handleClickOutsideBox(event) {
+        // const form1 = document.querySelector('.form');
+        
+        // if (form1.style.visibility=='visible' && !form1.contains(event.target)) {
+        //   form1.style.visibility = 'hidden';
+        // }
+      });
