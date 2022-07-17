@@ -100,11 +100,11 @@ form.form {
     /* position: relative; */
     width: 95%;
     height: 30px;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
 
     bottom: px;
     font-size: 12px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -121,4 +121,9 @@ form.form {
     border-radius: 5px;
     /* height: 0px; */
 
+}
+
+.userTextSpan p {
+    position: relative;
+    top: 15px;
 }
