@@ -1,13 +1,42 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let card = [{
+    text:'',
+    event:'',
+    day:'',
+    month:'',
+    year:'',
+
+}]
+
+
 let calContainer = document.querySelector('#calendarContainer')
 let cardsContainer = document.querySelector('#cardsNew')
 let monthHTML = document.querySelector('#date-string')
 let dateFormCont = document.querySelector('#dateFormCont')
 
 let table = document.createElement('table')
+table.setAttribute('id','caltable')
 let tr = document.createElement('tr')
 
 
 let dateForm = document.createElement('form')
+dateForm.setAttribute('id','dateForm')
+
+
 
 let inputMonth = document.createElement('input')
 inputMonth.classList.add('inputDate')
@@ -27,132 +56,174 @@ inputMonth.setAttribute('id','inputMonth')
 inputYear.setAttribute('id','inputYear')
 dateSubmit.setAttribute('id','dateSubmit')
 
-dateForm.append(inputMonth,inputYear,dateSubmit)
-console.log(dateForm)
-dateFormCont.append(dateForm)
 
 
-// inputMonth.value = 7
-// inputYear.value = 
+// dateForm.append(inputMonth,inputYear,dateSubmit)
 
-let month = inputMonth.value
-let year = inputYear.value
-let date = new Date(year,month-1)
-let dayMonthStart = date.getDay()
-console.log(date)
-let daysInMonth = new Date(year,month,0).getDate()
+// dateFormCont.append(dateForm)
+
+let dateButton = document.querySelector('#dateForm')
 
 
-let pTagWithDate = document.createElement('h2')
+// dateButton.setAttribute('onsubmit', 'newDates();return false')
+// dateButton.setAttribute('return', '')
+// dateButton.setAttribute('false', '')
 
-let myDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
-pTagWithDate.innerHTML = myDate
-
-monthHTML.append(pTagWithDate)
-let bDaySelected, anniversarySelected
+let tble = document.querySelector('#caltable')
 
 
 
-let count = 0
-rowNum = 1
 
-for (let index = 0; index < dayMonthStart; index++) {
-    count = index+1
-    let td = document.createElement('td')
-    td.classList.add('box')    
-    tr.append(td)
+
+let month = new Date().getMonth()
+let year = new Date().getFullYear()
+
+
+
+
+function NextMonth(){
+    monthHTML.innerHTML =''
+    table.innerHTML = ''
+    month += 1 
+    newDates(month,year)
 }
 
-tr.setAttribute('id','row'+rowNum)
+function previousMonth(){
+    monthHTML.innerHTML =''
+    table.innerHTML = ''
+        month -= 1 
+            newDates(month,year)
+        }
 
-for (let index = 1; index < daysInMonth+1; index++) {
+
+function newDates(month,year){
     
-    if(count%7 == 0){
-        table.append(tr)
-        tr = document.createElement('tr')
-        rowNum++
-        tr.setAttribute('id','row'+rowNum)
-    }
+    let date = new Date(year,month)
+    let dayMonthStart = date.getDay()
+    let daysInMonth = new Date(year,month+1,0).getDate()
+    let myDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
 
-    count++
+    let namesOfTheWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+
+let tr = document.createElement('tr') 
     
-    let td = document.createElement('td')
-    td.innerHTML = index
-    td.classList.add('day','box')
-    td.setAttribute('id','day'+index) 
+    let count = 0
+    rowNum = 1
+    tr.setAttribute('id','row'+rowNum)
 
-    let formSpan = document.createElement('span')
-    formSpan.classList.add('formButton')
-    let plusPng = document.createElement('img')
-    plusPng.classList.add('showForm')
-    plusPng.src = './Static/Plus.png'
-
-    let inputContainer = document.createElement('div')
-    let subCont = document.createElement('div')
-    let subCont2 = document.createElement('div')
-    
-
-    let form = document.createElement('form')
-    form.classList.add('form')
-    
-    
-    let BdayPng = document.createElement('input')
-    BdayPng.classList.add('b-day-submit')
-    BdayPng.type = 'image'
-    BdayPng.src = './Static/Birthday-cake.png'
-    BdayPng.required = true;
-    // subCont.append(BdayPng)
-    
-    
-    let anniversaryPng = document.createElement('input')
-    anniversaryPng.classList.add('anniv-submit')
-    anniversaryPng.type = 'image'
-    anniversaryPng.src = './Static/Growing-heart.png'
-    anniversaryPng.required = true;
-    // subCont2.append(anniversaryPng)
-
-    // subCont.style.padding ='10px'
-    // subCont2.style.padding ='10px'
-    // subCont.style.display ='inline-block'
-    // subCont2.style.display ='inline-block'
-    // subCont.classList.add('submit-bday-cont')
-    // subCont2.classList.add('submit-anni-cont')
-
-
-    let input = document.createElement('input')
-    input.setAttribute('id',`userInput${index}`)
-    input.classList.add(`userInput`)
-    input.type = 'text'
-
-    form.append(input,BdayPng,anniversaryPng)
-    // form.append(input,subCont,subCont2)
-    inputContainer.append(form)
-    formSpan.append(plusPng,form)
-    td.append(formSpan)
-    tr.append(td)
-    
-}
-for (let index = count; index < 34; index++) {
-    let td = document.createElement('td')
-    td.classList.add('box')
-        tr.append(td)
-}
-
-if(count>35){
-    for (let index = 0; index < 42-(daysInMonth+dayMonthStart); index++) {
+    for (let index = 0; index < 7; index++) {
+        
         let td = document.createElement('td')
-    
-    td.classList.add('box') 
-    
-    tr.append(td)
-    
+        td.textContent = namesOfTheWeek[index]
+        td.classList.add('Days-Of-Week')    
+        tr.append(td)
+        
+        
     }
-}
+    table.append(tr)
+    tr = document.createElement('tr')
+    rowNum++
+    tr.setAttribute('id','row'+rowNum)
+        
+    for (let index = 0; index < dayMonthStart; index++) {
 
-table.append(tr)
-calContainer.append(table)
+        count = index+1
+        let td = document.createElement('td')
+        td.classList.add('box')    
+        tr.append(td)
+    }
+    
+    
+    for (let index = 1; index < daysInMonth+1; index++) {
+        
+        if(count%7 == 0){
+            table.append(tr)
+            tr = document.createElement('tr')
+            rowNum++
+            tr.setAttribute('id','row'+rowNum)
+        }
+    
+        count++
+        
+        let td = document.createElement('td')
+        td.innerHTML = index
+        td.classList.add('day','box')
+        td.setAttribute('id','day'+index) 
+    
+        let formSpan = document.createElement('span')
+        formSpan.classList.add('formButton')
+        let plusPng = document.createElement('img')
+        plusPng.classList.add('showForm')
+        plusPng.src = './Static/Plus.png'
+    
+        let inputContainer = document.createElement('div')
+        let subCont = document.createElement('div')
+        let subCont2 = document.createElement('div')
+        
+    
+        let form = document.createElement('form')
+        form.classList.add('form')
+        
+        
+        let BdayPng = document.createElement('input')
+        BdayPng.classList.add('b-day-submit')
+        BdayPng.type = 'image'
+        BdayPng.src = './Static/Birthday-cake.png'
+        BdayPng.required = true;
+        // subCont.append(BdayPng)
+        
+        
+        let anniversaryPng = document.createElement('input')
+        anniversaryPng.classList.add('anniv-submit')
+        anniversaryPng.type = 'image'
+        anniversaryPng.src = './Static/Growing-heart.png'
+        anniversaryPng.required = true;
+        // subCont2.append(anniversaryPng)
+    
+        // subCont.style.padding ='10px'
+        // subCont2.style.padding ='10px'
+        // subCont.style.display ='inline-block'
+        // subCont2.style.display ='inline-block'
+        // subCont.classList.add('submit-bday-cont')
+        // subCont2.classList.add('submit-anni-cont')
+    
+    
+        let input = document.createElement('input')
+        input.setAttribute('id',`userInput${index}`)
+        input.classList.add(`userInput`)
+        input.type = 'text'
+    
+        form.append(input,BdayPng,anniversaryPng)
+        // form.append(input,subCont,subCont2)
+        inputContainer.append(form)
+        formSpan.append(plusPng,form)
+        td.append(formSpan)
+        tr.append(td)
+        
+    }
+    for (let index = count; index <= 34; index++) {
+        let td = document.createElement('td')
+        td.classList.add('box')
+            tr.append(td)
+    }
+    
+    if(count>35){
+        for (let index = 0; index < 42-(daysInMonth+dayMonthStart); index++) {
+            let td = document.createElement('td')
+        
+        td.classList.add('box') 
+        
+        tr.append(td)
+        
+        }
+    }
+    
+    table.append(tr)
+    calContainer.append(table)
+    monthHTML.append(myDate)
+    
 
-
+    
 let annivAll = document.querySelectorAll('.b-day-submit')
 let bdayAll = document.querySelectorAll('.anniv-submit')
 let formButton = document.querySelectorAll('.formButton')
@@ -205,6 +276,14 @@ function createBdayCard(e) {
     deleteCard.src ='./Static/Delete.png'
     deleteCard.addEventListener('click',remove_div)
 
+    console.log(this.parentElement.parentElement.parentElement)
+    // card.push({
+    //     text:this.parentElement.firstChild.value,
+    //     events:occasionType,
+    //     day:'',
+    //     month:'',
+    //     year:''
+    // })
 
     
     this.parentElement.firstChild.value = ''
@@ -216,6 +295,8 @@ function createBdayCard(e) {
  
     userInfoContainer.append(imgEvent,occasionTypeCont,userTextSpan,deleteCard)
     specificDay.append(userInfoContainer)
+
+    
 }
 
 
@@ -243,15 +324,27 @@ let form = document.querySelectorAll('form')
 //     form.style.display = 'visible'
 // })
 showForm.forEach(element=>{
-    element.addEventListener('click',reveal)})
+    element.addEventListener('click',reveal)
+  })
 
 function reveal(element){
 
+    let popUpContainer = element.target.nextElementSibling;
+    let plusImagePopUp = element.target;
     
-        if(element.target.nextElementSibling.style.visibility == 'visible'){
-            element.target.style.visibility = ''
-            element.target.nextElementSibling.style.visibility ='hidden' 
-            element.target.style.visibility = ''
+        // if(popUpContainer.style.display == 'unset'){
+        //     plusImagePopUp.style.display = ''
+        //     popUpContainer.style.display ='none' 
+        //     plusImagePopUp.style.display = ''
+        // } else {element.target.nextElementSibling.style.display == 'unset'
+        // // element.target.style.visibility = 'visible'
+        //     element.target.nextElementSibling.style.display  = 'unset'
+        //     element.target.style.display = 'unset'
+        // }
+        if(popUpContainer.style.visibility == 'visible'){
+            plusImagePopUp.style.visibility = ''
+            popUpContainer.style.visibility ='hidden' 
+            plusImagePopUp.style.visibility = ''
         } else {element.target.nextElementSibling.style.visibility == 'hidden'
         // element.target.style.visibility = 'visible'
             element.target.nextElementSibling.style.visibility  = 'visible'
@@ -267,3 +360,249 @@ document.addEventListener('click', function handleClickOutsideBox(event) {
         //   form1.style.visibility = 'hidden';
         // }
       });
+}
+
+
+newDates(month,year)
+
+
+// function newDates(){
+//     // tble.innerHTML = ''
+//     // console.log(tble)
+
+
+//     let month = Number(inputMonth.value)
+//     let year = Number(inputYear.value)
+//     let date = new Date(year,month-1)
+//     let dayMonthStart = date.getDay()
+//     let daysInMonth = new Date(year,month,0).getDate()
+    
+    
+//     let pTagWithDate = document.createElement('h2')
+//     hju
+//     let myDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
+//     pTagWithDate.innerHTML = myDate
+    
+//     monthHTML.append(pTagWithDate)
+    
+    
+    
+//     let count = 0
+//     rowNum = 1
+    
+//     for (let index = 0; index < dayMonthStart; index++) {
+//         count = index+1
+//         let td = document.createElement('td')
+//         td.classList.add('box')    
+//         tr.append(td)
+//     }
+    
+//     tr.setAttribute('id','row'+rowNum)
+    
+//     for (let index = 1; index < daysInMonth+1; index++) {
+        
+//         if(count%7 == 0){
+//             table.append(tr)
+//             tr = document.createElement('tr')
+//             rowNum++
+//             tr.setAttribute('id','row'+rowNum)
+//         }
+    
+//         count++
+        
+//         let td = document.createElement('td')
+//         td.innerHTML = index
+//         td.classList.add('day','box')
+//         td.setAttribute('id','day'+index) 
+    
+//         let formSpan = document.createElement('span')
+//         formSpan.classList.add('formButton')
+//         let plusPng = document.createElement('img')
+//         plusPng.classList.add('showForm')
+//         plusPng.src = './Static/Plus.png'
+    
+//         let inputContainer = document.createElement('div')
+//         let subCont = document.createElement('div')
+//         let subCont2 = document.createElement('div')
+        
+    
+//         let form = document.createElement('form')
+//         form.classList.add('form')
+        
+        
+//         let BdayPng = document.createElement('input')
+//         BdayPng.classList.add('b-day-submit')
+//         BdayPng.type = 'image'
+//         BdayPng.src = './Static/Birthday-cake.png'
+//         BdayPng.required = true;
+//         // subCont.append(BdayPng)
+        
+        
+//         let anniversaryPng = document.createElement('input')
+//         anniversaryPng.classList.add('anniv-submit')
+//         anniversaryPng.type = 'image'
+//         anniversaryPng.src = './Static/Growing-heart.png'
+//         anniversaryPng.required = true;
+//         // subCont2.append(anniversaryPng)
+    
+//         // subCont.style.padding ='10px'
+//         // subCont2.style.padding ='10px'
+//         // subCont.style.display ='inline-block'
+//         // subCont2.style.display ='inline-block'
+//         // subCont.classList.add('submit-bday-cont')
+//         // subCont2.classList.add('submit-anni-cont')
+    
+    
+//         let input = document.createElement('input')
+//         input.setAttribute('id',`userInput${index}`)
+//         input.classList.add(`userInput`)
+//         input.type = 'text'
+    
+//         form.append(input,BdayPng,anniversaryPng)
+//         // form.append(input,subCont,subCont2)
+//         inputContainer.append(form)
+//         formSpan.append(plusPng,form)
+//         td.append(formSpan)
+//         tr.append(td)
+        
+//     }
+//     for (let index = count; index < 34; index++) {
+//         let td = document.createElement('td')
+//         td.classList.add('box')
+//             tr.append(td)
+//     }
+    
+//     if(count>35){
+//         for (let index = 0; index < 42-(daysInMonth+dayMonthStart); index++) {
+//             let td = document.createElement('td')
+        
+//         td.classList.add('box') 
+        
+//         tr.append(td)
+        
+//         }
+//     }
+    
+//     table.append(tr)
+//     calContainer.append(table)
+    
+// }
+// inputMonth.value = 7
+// inputYear.value = 2022
+
+// let month = Number(inputMonth.value)
+// let year = Number(inputYear.value)
+// let date = new Date(year,month-1)
+// let dayMonthStart = date.getDay()
+// let daysInMonth = new Date(year,month,0).getDate()
+
+
+// let pTagWithDate = document.createElement('h2')
+
+// let myDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
+// pTagWithDate.innerHTML = myDate
+
+// monthHTML.append(pTagWithDate)
+// let bDaySelected, anniversarySelected
+
+
+
+// let count = 0
+// rowNum = 1
+
+// for (let index = 0; index < dayMonthStart; index++) {
+//     count = index+1
+//     let td = document.createElement('td')
+//     td.classList.add('box')    
+//     tr.append(td)
+// }
+
+// tr.setAttribute('id','row'+rowNum)
+
+// for (let index = 1; index < daysInMonth+1; index++) {
+    
+//     if(count%7 == 0){
+//         table.append(tr)
+//         tr = document.createElement('tr')
+//         rowNum++
+//         tr.setAttribute('id','row'+rowNum)
+//     }
+
+//     count++
+    
+//     let td = document.createElement('td')
+//     td.innerHTML = index
+//     td.classList.add('day','box')
+//     td.setAttribute('id','day'+index) 
+
+//     let formSpan = document.createElement('span')
+//     formSpan.classList.add('formButton')
+//     let plusPng = document.createElement('img')
+//     plusPng.classList.add('showForm')
+//     plusPng.src = './Static/Plus.png'
+
+//     let inputContainer = document.createElement('div')
+//     let subCont = document.createElement('div')
+//     let subCont2 = document.createElement('div')
+    
+
+//     let form = document.createElement('form')
+//     form.classList.add('form')
+    
+    
+//     let BdayPng = document.createElement('input')
+//     BdayPng.classList.add('b-day-submit')
+//     BdayPng.type = 'image'
+//     BdayPng.src = './Static/Birthday-cake.png'
+//     BdayPng.required = true;
+//     // subCont.append(BdayPng)
+    
+    
+//     let anniversaryPng = document.createElement('input')
+//     anniversaryPng.classList.add('anniv-submit')
+//     anniversaryPng.type = 'image'
+//     anniversaryPng.src = './Static/Growing-heart.png'
+//     anniversaryPng.required = true;
+//     // subCont2.append(anniversaryPng)
+
+//     // subCont.style.padding ='10px'
+//     // subCont2.style.padding ='10px'
+//     // subCont.style.display ='inline-block'
+//     // subCont2.style.display ='inline-block'
+//     // subCont.classList.add('submit-bday-cont')
+//     // subCont2.classList.add('submit-anni-cont')
+
+
+//     let input = document.createElement('input')
+//     input.setAttribute('id',`userInput${index}`)
+//     input.classList.add(`userInput`)
+//     input.type = 'text'
+
+//     form.append(input,BdayPng,anniversaryPng)
+//     // form.append(input,subCont,subCont2)
+//     inputContainer.append(form)
+//     formSpan.append(plusPng,form)
+//     td.append(formSpan)
+//     tr.append(td)
+    
+// }
+// for (let index = count; index < 34; index++) {
+//     let td = document.createElement('td')
+//     td.classList.add('box')
+//         tr.append(td)
+// }
+
+// if(count>35){
+//     for (let index = 0; index < 42-(daysInMonth+dayMonthStart); index++) {
+//         let td = document.createElement('td')
+    
+//     td.classList.add('box') 
+    
+//     tr.append(td)
+    
+//     }
+// }
+
+// table.append(tr)
+// calContainer.append(table)
+
