@@ -9,9 +9,7 @@ body {
 .formButton {
 
     display: flex;
-    /* justify-content: flex-start; */
     align-items: center;
-    /* position: relative; */
     top: 5px;
     left: 80%;
     width: 210px;
@@ -19,7 +17,6 @@ body {
     visibility: hidden;
     position: absolute;
     z-index: 1;
-    /*margin-top: 33px;*/
 }
 
 
@@ -45,7 +42,6 @@ td {
 .day.box {
 
     color: #01569b;
-    /* background-color: #c7e5fd; */
     transition: 0.2s ease-in-out;
     font-weight: bold;
     font-size: 22px;
@@ -60,16 +56,15 @@ td {
 
 }
 
-.day.box:hover .formButton {
+.day:hover .formButton {
     visibility: visible;
 }
 
 .box {
 width: 170px;
 height: 120px;
-
 border: 1px solid #c7e5fd;
-    /* background-color: #ffd0d0; */
+
 }
 
 .box:hover {
@@ -86,8 +81,7 @@ form.form {
     display: inline-block;
     line-height: 1;
     visibility: hidden;
-    /* position: absolute; */
-    /* left:50%; */
+ 
 }
 
 .userInput {
@@ -97,12 +91,9 @@ form.form {
 }
 
 .card {
-    /* position: relative; */
     width: 95%;
     height: 30px;
     border-radius: 5px;
-
-    bottom: px;
     font-size: 12px;
     border: 1px solid black;
     display: flex;
@@ -116,9 +107,7 @@ form.form {
 
 .submit-bday-cont,.submit-anni-cont{
     padding: 15px;
-    /* margin: 5px; */
     background-color: #c7e5fd;
     border-radius: 5px;
-    /* height: 0px; */
 
-}
+} 
