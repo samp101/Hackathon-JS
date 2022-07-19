@@ -1,28 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-let card = [{
-    text:'',
-    event:'',
-    day:'',
-    month:'',
-    year:'',
-
-}]
-
-
 let calContainer = document.querySelector('#calendarContainer')
 let cardsContainer = document.querySelector('#cardsNew')
 let monthHTML = document.querySelector('#date-string')
@@ -32,53 +7,12 @@ let table = document.createElement('table')
 table.setAttribute('id','caltable')
 let tr = document.createElement('tr')
 
-
-let dateForm = document.createElement('form')
-dateForm.setAttribute('id','dateForm')
-
-
-
-let inputMonth = document.createElement('input')
-inputMonth.classList.add('inputDate')
-inputMonth.type = 'number'
-
-let inputYear = document.createElement('input')
-inputYear.classList.add('inputDate')
-inputYear.type = 'number'
-
-let dateSubmit = document.createElement('input')
-dateSubmit.type = 'submit'
-dateSubmit.value = 'search'
-dateSubmit.classList.add('inputDate')
-
-
-inputMonth.setAttribute('id','inputMonth')
-inputYear.setAttribute('id','inputYear')
-dateSubmit.setAttribute('id','dateSubmit')
-
-
-
-// dateForm.append(inputMonth,inputYear,dateSubmit)
-
-// dateFormCont.append(dateForm)
-
 let dateButton = document.querySelector('#dateForm')
-
-
-// dateButton.setAttribute('onsubmit', 'newDates();return false')
-// dateButton.setAttribute('return', '')
-// dateButton.setAttribute('false', '')
 
 let tble = document.querySelector('#caltable')
 
-
-
-
-
 let month = new Date().getMonth()
 let year = new Date().getFullYear()
-
-
 
 
 function NextMonth(){
@@ -248,52 +182,59 @@ function createBdayCard(e) {
     let userInfoContainer = document.createElement('div')
     userInfoContainer.classList.add('card')
 
-    let userTextSpan = document.createElement('span')
+    let textcont = document.createElement('div')
+    textcont.classList.add('card-texts')
+
+    // let userTextSpan = document.createElement('span')
     let userInputText = document.createElement('p')
 
 
     
     userInputText.textContent = this.parentElement.firstChild.value
+    // userTextSpan.textContent = this.parentElement.firstChild.value
     
-    userTextSpan.append(userInputText)
-    userTextSpan.classList.add('userTextSpan')
+    // userTextSpan.append(userInputText)
+    // userTextSpan.classList.add('userTextSpan')
+    userInputText.classList.add('userTextSpan')
     let imgEvent  = document.createElement('img')
     imgEvent.src = this.src
     
     let occasionType;
     if(imgEvent.src == 'http://127.0.0.1:5501/Static/Growing-heart.png'){
          occasionType = document.createTextNode('Happy Anniversary')
+         userInfoContainer.style.backgroundColor = 'rgba(244, 171, 186, 0.29)'
     }else{
         occasionType = document.createTextNode('Happy Birthday')
+        userInfoContainer.style.backgroundColor = 'rgba(197, 213, 236, 1)'
     }
-    let occasionTypeCont = document.createElement('span')
+    // let occasionTypeCont = document.createElement('span')
+    let occasionTypeCont = document.createElement('p')
     occasionTypeCont.classList.add('event-status')
     occasionTypeCont.append(occasionType)
+    
 
 
-
+    let contForDeleteImg = document.createElement('div')
+    contForDeleteImg.classList.add('contForDelete')
     let deleteCard = document.createElement('img')
-    deleteCard.src ='./Static/Delete.png'
+    deleteCard.classList.add('deleteCard')
+    deleteCard.src ='./Static/fill-4.png'
     deleteCard.addEventListener('click',remove_div)
-
-    console.log(this.parentElement.parentElement.parentElement)
-    // card.push({
-    //     text:this.parentElement.firstChild.value,
-    //     events:occasionType,
-    //     day:'',
-    //     month:'',
-    //     year:''
-    // })
+    contForDeleteImg.append(deleteCard)
 
     
+
+    textcont.append(occasionTypeCont,userInputText)
+
     this.parentElement.firstChild.value = ''
     let imgOpen = this.parentElement.parentElement.firstChild
     console.log(imgOpen)
     let formDiv = this.parentElement
     formDiv.style.visibility = 'hidden' 
     imgOpen.style.visibility = ''
- 
-    userInfoContainer.append(imgEvent,occasionTypeCont,userTextSpan,deleteCard)
+    
+    // userInfoContainer.append(imgEvent,occasionTypeCont,userTextSpan,deleteCard)
+    userInfoContainer.append(imgEvent,textcont,contForDeleteImg)
     specificDay.append(userInfoContainer)
 
     
@@ -301,7 +242,7 @@ function createBdayCard(e) {
 
 
 function remove_div(){
-    this.parentElement.remove();
+    this.parentElement.parentElement.remove();
   }
 // function edit(){
 //     console.log(this.parentElement)
@@ -606,3 +547,28 @@ newDates(month,year)
 // table.append(tr)
 // calContainer.append(table)
 
+
+
+
+// let dateForm = document.createElement('form')
+// dateForm.setAttribute('id','dateForm')
+
+
+
+// let inputMonth = document.createElement('input')
+// inputMonth.classList.add('inputDate')
+// inputMonth.type = 'number'
+
+// let inputYear = document.createElement('input')
+// inputYear.classList.add('inputDate')
+// inputYear.type = 'number'
+
+// let dateSubmit = document.createElement('input')
+// dateSubmit.type = 'submit'
+// dateSubmit.value = 'search'
+// dateSubmit.classList.add('inputDate')
+
+
+// inputMonth.setAttribute('id','inputMonth')
+// inputYear.setAttribute('id','inputYear')
+// dateSubmit.setAttribute('id','dateSubmit')

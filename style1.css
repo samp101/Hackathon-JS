@@ -1,0 +1,223 @@
+@font-face {
+    font-family: 'Archia';
+    src: url('./Static/Archia_Regular/Archia_Regular/Archia-Regular-Desktop/Archia-Regular.otf');
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family:Archia;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    overflow-x: hidden;
+
+}
+
+.formButton {
+
+    display: flex;
+    /* justify-content: flex-start; */
+    align-items: center;
+    /* position: relative; */
+    top: 0px;
+    left: 85%;
+    width: 210px;
+    cursor: pointer;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    /*margin-top: 33px;*/
+}
+
+
+#calendarContainer {
+    /* padding-top: 50px; */
+    /* margin-left: 50px; */
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+table {
+    /* width: 1528px;
+    height: 760px; */
+    /* background-color: #03a9f4; */
+    /* box-shadow: 0 0 10px 5px rgb(90, 90, 90); */
+}
+
+td {
+    vertical-align: top;
+}
+
+.day.box {
+
+    color: #0A2852;
+    padding: 8px;
+    /* background-color: #c7e5fd; */
+    /* transition: 0.2s ease-in-out; */
+    font-weight: medium;
+    font-size: 12px;
+    position: relative;
+}
+
+
+.day.box:hover {
+    /* box-shadow: 0 0 10px 1px rgb(90, 90, 90);
+    background-color: #8dccff;
+    cursor: auto; */
+
+}
+
+.day.box:hover .formButton {
+    visibility: visible;
+}
+
+.box {
+width: 100px;
+height: 100px;
+
+border: 1px solid #E5E5E5;
+border-collapse: separate;
+    /* background-color: #ffd0d0; */
+}
+.Days-Of-Week{
+    color: #99a6b6;
+    font-size: 12px;
+    padding-bottom: 6px;
+}
+
+
+table, tr, td{
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+}
+
+
+img.showForm {
+    width: 24px;
+    height: 24px;
+}
+
+form.form {
+
+    display: inline-block;
+    line-height: 1;
+    visibility: hidden;
+    /* position: absolute; */
+    /* left:50%; */
+}
+
+.userInput {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.card {
+
+    width: 98%;
+    height: 35px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: px;
+    margin-bottom: 5px;
+    /* position: absolute;
+    bottom: 0px; */
+}
+
+.card span{
+    position: absolute;
+    left: 20px;
+}
+.b-day-submit{
+}
+#changeDatesDateCont{
+    display:flex;
+    justify-items: space-around;
+}
+#changeDatesDateCont p{
+    margin-right: 14px;
+}
+#date-string{
+    font-size: 32px;
+    color: #04333b;
+}
+button{
+    background-color: white;
+    border: none;
+}
+
+.submit-bday-cont,.submit-anni-cont{
+    padding: 15px;
+    /* margin: 5px; */
+    background-color: #c7e5fd;
+    border-radius: 5px;
+    /* height: 0px; */
+
+}
+
+.userTextSpan {
+    position: relative;
+    /* top: 15px; */
+    margin: 0px;
+    display: block;
+}
+.event-status{
+    font-size: 10px;
+    font-weight: 100;
+    color: #9EACB0;
+}
+.card-texts{
+    /* height: 30px; */
+    width:100px;
+    /* display: flex;
+    flex-direction: column; */
+    /* margin-left: 5px; */
+    position: absolute;
+    left:30px
+    
+}
+.card-texts p {
+    margin: 0px;
+}
+/* .card img:first-child{
+    height: 25px;
+} */
+.contForDelete{
+    display: none;
+    width: 10px;
+    height: 100%;
+    position: relative;
+
+
+}
+.card:hover .contForDelete{
+    display: unset;
+
+}
+.formButton:hover.contForDelete{
+    display: unset;
+
+} 
+.card:hover + .showForm{
+    display: none;
+}
+.deleteCard{
+    width: 7px;
+    height:7px;
+    position: absolute;
+    top:13px
+}
+.contForCont{
+    /* position: absolute;
+    bottom: 0px; */
+    /* width: 9%; */
+    /* height: 100px; */
+}

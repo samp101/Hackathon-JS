@@ -5,42 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style1.css">
+    <link rel="shortcut icon" href="./Static/unnamed.jpg" type="image/x-icon">
 </head>
-<style>
-    /* .box{
-        border: 1px solid black;
-        
-        height: 30px;
-    }
-
-    .formButton{
-    }
-    #card1{
-         border: 1px solid black;
-         width: 100%;
-         height: 30px;
-
-     }
-     .userInput{
-        width: 50%;
-     }
-     form{
-        display: none;
-     } */
-</style>
 <body>
     
-
-    <button onclick='previousMonth()'>Previous Month</button>
-    <button onclick='NextMonth()' >Next Month</button>
-    <p id = 'date-string'></p>    
-    <!-- <div id="dateFormCont"></div> -->
-<!-- <button onclick='c()'></button> -->
+       
 <div id="calendarContainer">
+    <div id="changeDatesDateCont">
+        <p id = 'date-string'></p> 
+        <button onclick='previousMonth()'><img src="./Static/previous.png" alt="" srcset=""></button>
+        <button onclick='NextMonth()' ><img src="./Static/next.png" alt="" srcset=""></button>
+    </div>
 </div>
 
-<div id='cardsNew'></div>
 
 
 <script src="script.js"></script>
