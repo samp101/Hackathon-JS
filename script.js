@@ -27,7 +27,7 @@ function previousMonth(){
     table.innerHTML = ''
         month -= 1 
             newDates(month,year)
-        }
+}
 
 
 function newDates(month,year){
@@ -39,7 +39,7 @@ function newDates(month,year){
 
     let namesOfTheWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
 
-let tr = document.createElement('tr') 
+    let tr = document.createElement('tr') 
     
     let count = 0
     rowNum = 1
@@ -54,6 +54,7 @@ let tr = document.createElement('tr')
         
         
     }
+    
     table.append(tr)
     tr = document.createElement('tr')
     rowNum++
@@ -78,60 +79,54 @@ let tr = document.createElement('tr')
         }
     
         count++
-        
+        // Each box for the day
         let td = document.createElement('td')
         td.innerHTML = index
         td.classList.add('day','box')
         td.setAttribute('id','day'+index) 
-    
-        let formSpan = document.createElement('span')
+        
+        // The div which has the form
+        let formSpan = document.createElement('div')
         formSpan.classList.add('formButton')
         let plusPng = document.createElement('img')
         plusPng.classList.add('showForm')
         plusPng.src = './Static/Plus.png'
-    
-        let inputContainer = document.createElement('div')
-        let subCont = document.createElement('div')
-        let subCont2 = document.createElement('div')
         
-    
+        // This div is where all the cards will be stored
+        let cardContainerInDay = document.createElement('div')
+        cardContainerInDay.classList.add('contOfContForCard')
+        
+        // This is the container for the form where to add a Bday and Anniversary
+        let inputContainer = document.createElement('div')
         let form = document.createElement('form')
         form.classList.add('form')
         
-        
+        // These are the submit buttons for an anniversary and a Bday
         let BdayPng = document.createElement('input')
         BdayPng.classList.add('b-day-submit')
         BdayPng.type = 'image'
-        BdayPng.src = './Static/Birthday-cake.png'
+        BdayPng.src = './Static/Frame-5.png'
         BdayPng.required = true;
-        // subCont.append(BdayPng)
         
-        
+        // These are the submit buttons for an anniversary and a Bday
         let anniversaryPng = document.createElement('input')
         anniversaryPng.classList.add('anniv-submit')
         anniversaryPng.type = 'image'
-        anniversaryPng.src = './Static/Growing-heart.png'
+        anniversaryPng.src = './Static/Frame-6.png'
         anniversaryPng.required = true;
-        // subCont2.append(anniversaryPng)
     
-        // subCont.style.padding ='10px'
-        // subCont2.style.padding ='10px'
-        // subCont.style.display ='inline-block'
-        // subCont2.style.display ='inline-block'
-        // subCont.classList.add('submit-bday-cont')
-        // subCont2.classList.add('submit-anni-cont')
-    
-    
+        // Here is the input bpx for text to write the names
         let input = document.createElement('input')
         input.setAttribute('id',`userInput${index}`)
         input.classList.add(`userInput`)
+        input.placeholder = 'Type Here'
         input.type = 'text'
     
+        
         form.append(input,BdayPng,anniversaryPng)
-        // form.append(input,subCont,subCont2)
         inputContainer.append(form)
         formSpan.append(plusPng,form)
-        td.append(formSpan)
+        td.append(cardContainerInDay,formSpan)
         tr.append(td)
         
     }
@@ -161,9 +156,6 @@ let tr = document.createElement('tr')
 let annivAll = document.querySelectorAll('.b-day-submit')
 let bdayAll = document.querySelectorAll('.anniv-submit')
 let formButton = document.querySelectorAll('.formButton')
-formButton.forEach(element=>{
-// element.addEventListener('click',()=>alert('hello'))
-})
 
 
 bdayAll.forEach(element=>
@@ -175,8 +167,8 @@ annivAll.forEach(element=>
 
 function createBdayCard(e) {
     e.preventDefault()
-    let specificDay = e.target.parentElement.parentElement.parentElement
-    
+    let specificDay = e.target.parentElement.parentElement.parentElement.firstChild.nextElementSibling
+    console.log(specificDay);
     e.target.setAttribute('required', '') 
 
     let userInfoContainer = document.createElement('div')
@@ -197,13 +189,16 @@ function createBdayCard(e) {
     // userTextSpan.classList.add('userTextSpan')
     userInputText.classList.add('userTextSpan')
     let imgEvent  = document.createElement('img')
-    imgEvent.src = this.src
+    
     
     let occasionType;
     if(imgEvent.src == 'http://127.0.0.1:5501/Static/Growing-heart.png'){
-         occasionType = document.createTextNode('Happy Anniversary')
-         userInfoContainer.style.backgroundColor = 'rgba(244, 171, 186, 0.29)'
+        imgEvent.src = './Static/Growing-heart.png'     
+        // imgEvent.src = this.src     
+        occasionType = document.createTextNode('Happy Anniversary')
+        userInfoContainer.style.backgroundColor = 'rgba(244, 171, 186, 0.29)'
     }else{
+        imgEvent.src = './Static/Birthday-cake.png'     
         occasionType = document.createTextNode('Happy Birthday')
         userInfoContainer.style.backgroundColor = 'rgba(197, 213, 236, 1)'
     }

@@ -3,6 +3,8 @@
     src: url('./Static/Archia_Regular/Archia_Regular/Archia-Regular-Desktop/Archia-Regular.otf');
 }
 
+/* TABLE */
+
 body {
     padding: 0;
     margin: 0;
@@ -14,27 +16,7 @@ body {
     overflow-x: hidden;
 
 }
-
-.formButton {
-
-    display: flex;
-    /* justify-content: flex-start; */
-    align-items: center;
-    /* position: relative; */
-    top: 0px;
-    left: 85%;
-    width: 210px;
-    cursor: pointer;
-    visibility: hidden;
-    position: absolute;
-    z-index: 1;
-    /*margin-top: 33px;*/
-}
-
-
 #calendarContainer {
-    /* padding-top: 50px; */
-    /* margin-left: 50px; */
     width: 90vw;
     display: flex;
     justify-content: center;
@@ -56,14 +38,13 @@ td {
 .day.box {
 
     color: #0A2852;
-    padding: 8px;
+    /* padding: 8px; */
     /* background-color: #c7e5fd; */
     /* transition: 0.2s ease-in-out; */
     font-weight: medium;
     font-size: 12px;
     position: relative;
 }
-
 
 .day.box:hover {
     /* box-shadow: 0 0 10px 1px rgb(90, 90, 90);
@@ -89,13 +70,31 @@ border-collapse: separate;
     font-size: 12px;
     padding-bottom: 6px;
 }
-
-
 table, tr, td{
     /* border: 1px solid black; */
     border-collapse: collapse;
 }
 
+
+
+
+/* Inputs where user can add a birthday */
+
+.formButton {
+
+    display: flex;
+    align-items: center;
+    top: 0px;
+    left: 85%;
+    width: 200px;
+    cursor: pointer;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    border: 1px solid rgba(194, 204, 206, 1);
+    padding: 10px;
+    border-radius: 10px;
+}
 
 img.showForm {
     width: 24px;
@@ -111,12 +110,64 @@ form.form {
     /* left:50%; */
 }
 
+.b-day-submit{
+    /* background-color: aqua; */
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 8px;
+}
+.anniv-submit{
+    /* background-color: aqua; */
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: 5px;
+    top: 8px;
+}
+
 .userInput {
     width: 100px;
     height: 30px;
     border-radius: 5px;
+    border: none;
 }
 
+
+
+
+
+
+
+
+
+
+/* .submit-bday-cont,.submit-anni-cont{ 
+     padding: 15px; 
+     margin: 5px; 
+     background-color: #c7e5fd;
+    border-radius: 5px; 
+     height: 0px; 
+
+} */
+.formButton:hover.contForDelete{
+    display: unset;
+
+}
+
+
+
+
+/* Here is the section for how the card will look */
+.contOfContForCard{
+    width: 100%;
+    min-height: 92%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-items: flex-end;
+    
+    overflow-y: hidden;
+}
 .card {
 
     width: 98%;
@@ -126,46 +177,19 @@ form.form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-left: px;
+    /* padding-left: px; */
     margin-bottom: 5px;
     /* position: absolute;
     bottom: 0px; */
 }
 
-.card span{
-    position: absolute;
-    left: 20px;
-}
-.b-day-submit{
-}
-#changeDatesDateCont{
-    display:flex;
-    justify-items: space-around;
-}
-#changeDatesDateCont p{
-    margin-right: 14px;
-}
-#date-string{
-    font-size: 32px;
-    color: #04333b;
-}
-button{
-    background-color: white;
-    border: none;
-}
-
-.submit-bday-cont,.submit-anni-cont{
-    padding: 15px;
-    /* margin: 5px; */
-    background-color: #c7e5fd;
-    border-radius: 5px;
-    /* height: 0px; */
+.card img{
+    /* width: 20px; */
 
 }
 
 .userTextSpan {
     position: relative;
-    /* top: 15px; */
     margin: 0px;
     display: block;
 }
@@ -187,9 +211,6 @@ button{
 .card-texts p {
     margin: 0px;
 }
-/* .card img:first-child{
-    height: 25px;
-} */
 .contForDelete{
     display: none;
     width: 10px;
@@ -202,10 +223,7 @@ button{
     display: unset;
 
 }
-.formButton:hover.contForDelete{
-    display: unset;
-
-} 
+ 
 .card:hover + .showForm{
     display: none;
 }
@@ -215,9 +233,22 @@ button{
     position: absolute;
     top:13px
 }
-.contForCont{
-    /* position: absolute;
-    bottom: 0px; */
-    /* width: 9%; */
-    /* height: 100px; */
+
+
+/* The Dates and buttons to change months  */
+
+#changeDatesDateCont{
+    display:flex;
+    justify-items: space-around;
+}
+#changeDatesDateCont p{
+    margin-right: 14px;
+}
+#date-string{
+    font-size: 32px;
+    color: #04333b;
+}
+button{
+    background-color: white;
+    border: none;
 }
