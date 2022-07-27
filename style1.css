@@ -53,7 +53,7 @@ td {
 
 }
 
-.day.box:hover .formButton {
+.day.box:hover .showForm {
     visibility: visible;
 }
 
@@ -132,7 +132,11 @@ form.form {
     border-radius: 5px;
     border: none;
 }
+.userInput:focus{
+    
+    outline: none;
 
+}
 
 
 
@@ -152,7 +156,6 @@ form.form {
 } */
 .formButton:hover.contForDelete{
     display: unset;
-
 }
 
 
