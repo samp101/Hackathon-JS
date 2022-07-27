@@ -1,0 +1,46 @@
+HTML:
+    Not much to say.  Nice and short haha
+
+
+CSS:
+    Things that were done well:
+        - Mostly well done. Can see that you understand the fundamentals.  
+    
+    Things to improve:
+        - I would just advise in general to maybe clean it up a little.  I don't only mean remove unused classes/styles, etc.  I'm also talking about maybe next time making the CSS a little more systematic.  Meaning, since one of the main principles behind programming is reusability, maybe you could separate your styles into categories.  Instead of just selecting a specific element and creating styles only for it, see if there are styles shared among a lot of elements, and see if you could make more general classes.
+
+        - Would be good to remove some selectors that are unnecessarily specific or incorrectly general.  I'm referring to things like "img.showForm".  Looking through the CSS and JS, it seems like the ".showForm" class is only used for images.  In that case, why select elements with that class using the img selector as well?  If you say it's to be more clear, then why do you not use img when you do ".card:hover + .showForm"?  Should be ".card:hover + img.showForm". 😉
+
+        - Maybe could've made this responsive?  If not, at least could've made it scrollable so that user could use this on phone. 🙂
+
+        - Last thing is CSS classes should be lower case. Just for convention's sake. Sure, might not seem like a big deal, but conventions tie into what's considered clean and readable code.  So, do your best to respect those conventions.
+
+
+JS:
+    Things that were done well:
+        - Good overall structure. Good to have references to DOM elements at the top level.
+        - I really like your use of the newDates function.  Reusable! And reused very very well.
+        - Good logic. Thought through nicely.
+        - Good addition of comments. Clarity is always good.
+
+    Things to improve:
+        - Tiny thing, but important to mention.  Better to have consistency in naming convention.  Meaning, since you have "previousMonth", you should also have "nextMonth", not "NextMonth".
+        - Big thing: Indentation is important for clean code.  Please try to make it consistent. :)
+        - All DOM references and variables that aren't supposed to change should be const, not let.  I might be sounding like a broken record by now, but please remember, you might get away with not using const for now, but in a production environment, you might really annoy people when you use let all over the place. 😂
+        - I don't understand line 7 and line 12. Why are you adding an id to the table element you created then selecting that element by its id?  The whole point of selecting the element using querySelector or something similar is to save a reference to that DOM element in your script so you can use it. You already have the reference, since you created it using JavaScript.
+        - Also, when you use querySelector in line 12, you get null, since querySelector or any other selecting method can only grab things that are already in the HTML of the page!  Try console logging tble after line 12, and you'll see it's null.
+        - rowNum on line 45 doesn't have const, let, or var. Should make sure to use one of those keywords when creating a new variable to show that it's being created in that place.
+        - line 40: "namesOfTheWeek" is never changing.  Therefore, it should be const, and it should be declared globally.  Keep in mind that constantly recreating the array "namesOfTheWeek" every time you call the function "newDates" is extra work for the function.
+        - line 48: "index < 7".  Why 7?  I understand after reviewing the code that it's 7 days in a week, but this is what you'd call a "magic number" in programming.  Just for clarity's sake, it would be a good idea to at least store the number in a variable above the for loop.  That way, everyone right away knows what it's meant to represent.  Something like: "const numDaysInWeek = 7".  And since the number of days in a week is always 7, it should be a const.  Magic numbers also in lines 133, 139, and 140.
+        - It's not only a good idea to create new functions for reusability. It's also a good idea to create functions for clarity. I mean that although all the actions you're doing in the newDates function only apply to setting the elements for the new dates for the chosen month, it's a good idea to break it apart into a lot of smaller functions.  You could've had one function for the first row, since it's special in that it has a set of boxes that aren't included in first week.  Then one for the middle rows, since they're always 7 days.  Then for last row.  Or maybe you could've done one function for the week and in that function, you could put conditions to determine if you want to generate elements for a full week or only for part of a week.  Then you could call that function 4 times, instead of having logic for different things right next to each other.
+        - lines 108 and 115: Names of images in code don't match actual file names. "Frame-5.png" in code should be "Frame 5.png", etc. This is actually a bug, not just a "best practice" thing. 😛  Check in folder "feedback-screenshots" to see what I'm talking about.
+        - line 158: formButton variable isn't being used. Also, should be formButtons, since you're grabbing all of them.
+        - line 170: This works, but it's very rigid.  Would be better if each box had some sort of id or attribute that you could use to select instead. You could pass this attribute to the "createBdayCard" function as well, along with the event object. I can show you how to do it if you want. 😁  In general, better to not use this sort of hard coded "node traversal". It makes your JS too dependent on the structure of your HTML.
+        - line 195: 
+            - The logic here is faulty.  You're creating the image element "imgEvent" right before this. Of course it doesn't have a src attribute yet, and therefore, the if statement in this line will never be true.
+            - Never ever use path of local server in your server.  Since you're serving your images from the same root folder as your code, use the relative path.
+        - line 239:  This function isn't really necessary, especially since you can just do <element>.remove().  Therefore, event listener on line 217 could've just been "deleteCard.addEventListener('click', deleteCard.remove)".  No need for a special function.
+
+
+OVERALL:
+    I could tell how hard you guys worked on this.  You did an amazing job.  I put a lot of things to improve, but that's normal at this stage.  I hope you gain from this feedback in the future.  Much hatzlacha!  It was a pleasure teaching you guys.  If you keep at it, you'll be great developers.  Keep in touch! 😄
