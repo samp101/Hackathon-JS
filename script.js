@@ -141,7 +141,7 @@ function newDates(month,year){
         form.append(input,BdayPng,anniversaryPng)
         inputContainer.append(form)
         formSpan.append(plusPng,form)
-        // td.append(cardContainerInDay,formSpan)
+        td.append(cardContainerInDay,formSpan)
         tr.append(td)
         
     }
