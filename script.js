@@ -208,9 +208,8 @@ function newDates(month,year){
 
             let occasionType;
         
-            if(formsButtonThatWasSelected.src == './Static/Frame-6.png'){
-                imgEvent.src = './Static/Growing-heart.png'     
-                // imgEvent.src = this.src     
+            if(formsButtonThatWasSelected.classList.contains('anniv-submit')){
+                imgEvent.src = './Static/Growing-heart.png'        
                 occasionType = document.createTextNode('Happy Anniversary')
                 userInfoContainer.style.backgroundColor = 'rgba(244, 171, 186, 0.29)'
             }else{
