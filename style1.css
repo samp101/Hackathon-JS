@@ -59,9 +59,9 @@ td {
 
 .box {
 width: 100px;
-/* height: 100px; */
+height: 100px;
 
-/* border: 1px solid #E5E5E5; */
+border: 1px solid #E5E5E5;
 border-collapse: separate;
     /* background-color: #ffd0d0; */
 }
@@ -85,7 +85,7 @@ table, tr, td{
     display: flex;
     align-items: center;
     top: 0px;
-    left: 85%;
+    left: 0px;
     width: 200px;
     cursor: pointer;
     visibility: hidden;
@@ -94,6 +94,8 @@ table, tr, td{
     border: 1px solid rgba(194, 204, 206, 1);
     padding: 10px;
     border-radius: 10px;
+    /* visibility: visible; */
+
 }
 
 img.showForm {
