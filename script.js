@@ -17,6 +17,8 @@ let tble = document.querySelector('#caltable')
 
 let month = new Date().getMonth()
 let year = new Date().getFullYear()
+const namesOfTheWeek = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+
 
 
 function NextMonth(){
@@ -37,16 +39,22 @@ function previousMonth(){
 function newDates(month,year){
     
     let date = new Date(year,month)
+
+    let todaysDate = new Date();
+    let todaysDay = todaysDate.getDate();
+    let todaysMonth = todaysDate.getMonth();
+    
+    let selectedMonth = todaysMonth == date.getMonth()
+    
     let dayMonthStart = date.getDay()
     let daysInMonth = new Date(year,month+1,0).getDate()
     let myDate = `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
-
-    let namesOfTheWeek = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
-
+    
+    
     let tr = document.createElement('tr') 
     
     let count = 0
-    rowNum = 1
+    let rowNum = 1
     tr.setAttribute('id','row'+rowNum)
 
     for (let index = 0; index < 7; index++) {
@@ -85,6 +93,9 @@ function newDates(month,year){
         count++
         // Each box for the day
         let td = document.createElement('td')
+        if(selectedMonth && index == todaysDay){
+            td.classList.add('current-day','box')
+        }
         td.innerHTML = index
         td.classList.add('day','box')
         td.setAttribute('id','day'+index) 
@@ -130,7 +141,7 @@ function newDates(month,year){
         form.append(input,BdayPng,anniversaryPng)
         inputContainer.append(form)
         formSpan.append(plusPng,form)
-        td.append(cardContainerInDay,formSpan)
+        // td.append(cardContainerInDay,formSpan)
         tr.append(td)
         
     }
@@ -157,108 +168,108 @@ function newDates(month,year){
     
 
     
-let annivAll = document.querySelectorAll('.b-day-submit')
-let bdayAll = document.querySelectorAll('.anniv-submit')
+        let annivAll = document.querySelectorAll('.b-day-submit')
+        let bdayAll = document.querySelectorAll('.anniv-submit')
 
 
-bdayAll.forEach(element=>
-    element.addEventListener('click',createBdayCard)
-)
-annivAll.forEach(element=>
-    element.addEventListener('click',createBdayCard)
-)
+        bdayAll.forEach(element=>
+            element.addEventListener('click',createBdayCard)
+        )
+        annivAll.forEach(element=>
+            element.addEventListener('click',createBdayCard)
+        )
+        
+        function createBdayCard(e) {
+            e.preventDefault()
+            const formsButtonThatWasSelected = this
+            numOfCard += 1
+        
+            let specificDay = e.target.parentElement.parentElement.parentElement.firstChild.nextElementSibling
 
-function createBdayCard(e) {
-    e.preventDefault()
-    const formsButtonThatWasSelected = this
-    numOfCard += 1
+            e.target.setAttribute('required', '') 
+        
+            let userInfoContainer = document.createElement('div')
+            userInfoContainer.classList.add('card')
+            userInfoContainer.draggable = 'true'
+            userInfoContainer.setAttribute('id',`card#${numOfCard}`)
+        
+        
+            let textcont = document.createElement('div')
+            textcont.classList.add('card-texts')
+        
+            let userInputText = document.createElement('p')
+        
+        
 
-    let specificDay = e.target.parentElement.parentElement.parentElement.firstChild.nextElementSibling
-    
-    e.target.setAttribute('required', '') 
+            userInputText.textContent = this.parentElement.firstChild.value
 
-    let userInfoContainer = document.createElement('div')
-    userInfoContainer.classList.add('card')
-    userInfoContainer.draggable = 'true'
-    userInfoContainer.setAttribute('id',`card#${numOfCard}`)
+            userInputText.classList.add('userTextSpan')
+            let imgEvent  = document.createElement('img')
 
+            let occasionType;
+        
+            if(formsButtonThatWasSelected.src == './Static/Frame-6.png'){
+                imgEvent.src = './Static/Growing-heart.png'     
+                // imgEvent.src = this.src     
+                occasionType = document.createTextNode('Happy Anniversary')
+                userInfoContainer.style.backgroundColor = 'rgba(244, 171, 186, 0.29)'
+            }else{
+                console.log(imgEvent)
+                imgEvent.src = './Static/Birthday-cake.png'     
+                occasionType = document.createTextNode('Happy Birthday')
+                userInfoContainer.style.backgroundColor = 'rgba(197, 213, 236, 1)'
+            }
+            // let occasionTypeCont = document.createElement('span')
+            let occasionTypeCont = document.createElement('p')
+            occasionTypeCont.classList.add('event-status')
+            occasionTypeCont.append(occasionType)
 
-    let textcont = document.createElement('div')
-    textcont.classList.add('card-texts')
+        
+        
+            let contForDeleteImg = document.createElement('div')
+            contForDeleteImg.classList.add('contForDelete')
+            let deleteCard = document.createElement('img')
+            deleteCard.classList.add('deleteCard')
+            deleteCard.src ='./Static/fill-4.png'
+            deleteCard.addEventListener('click',remove_div)
+            contForDeleteImg.append(deleteCard)
+        
 
-    let userInputText = document.createElement('p')
+        
+            textcont.append(occasionTypeCont,userInputText)
+        
+            this.parentElement.firstChild.value = ''
+            let imgOpen = this.parentElement.parentElement.firstChild
 
+            let form = this.parentElement
+            let formDiv = this.parentElement.parentElement
+            console.log(formDiv);
+            form.style.visibility = 'hidden' 
+            formDiv.style.visibility = 'hidden' 
+            imgOpen.style.visibility = ''
 
-    
-    userInputText.textContent = this.parentElement.firstChild.value
-    
-    userInputText.classList.add('userTextSpan')
-    let imgEvent  = document.createElement('img')
-    
-    let occasionType;
+            // userInfoContainer.append(imgEvent,occasionTypeCont,userTextSpan,deleteCard)
+        
+        
 
-    if(formsButtonThatWasSelected.src == 'http://127.0.0.1:5501/Static/Frame-6.png'){
-        imgEvent.src = './Static/Growing-heart.png'     
-        // imgEvent.src = this.src     
-        occasionType = document.createTextNode('Happy Anniversary')
-        userInfoContainer.style.backgroundColor = 'rgba(244, 171, 186, 0.29)'
-    }else{
-        console.log(imgEvent)
-        imgEvent.src = './Static/Birthday-cake.png'     
-        occasionType = document.createTextNode('Happy Birthday')
-        userInfoContainer.style.backgroundColor = 'rgba(197, 213, 236, 1)'
-    }
-    // let occasionTypeCont = document.createElement('span')
-    let occasionTypeCont = document.createElement('p')
-    occasionTypeCont.classList.add('event-status')
-    occasionTypeCont.append(occasionType)
-    
-
-
-    let contForDeleteImg = document.createElement('div')
-    contForDeleteImg.classList.add('contForDelete')
-    let deleteCard = document.createElement('img')
-    deleteCard.classList.add('deleteCard')
-    deleteCard.src ='./Static/fill-4.png'
-    deleteCard.addEventListener('click',remove_div)
-    contForDeleteImg.append(deleteCard)
-
-    
-
-    textcont.append(occasionTypeCont,userInputText)
-
-    this.parentElement.firstChild.value = ''
-    let imgOpen = this.parentElement.parentElement.firstChild
-    
-    let form = this.parentElement
-    let formDiv = this.parentElement.parentElement
-    console.log(formDiv);
-    form.style.visibility = 'hidden' 
-    formDiv.style.visibility = 'hidden' 
-    imgOpen.style.visibility = ''
-    
-    // userInfoContainer.append(imgEvent,occasionTypeCont,userTextSpan,deleteCard)
-
-
-    
-    //  specificDay = document.querySelectorAll('.box');
-    //  userInfoContainer = document.querySelectorAll('.small-box');
-    
-    
-    userInfoContainer.append(imgEvent,textcont,contForDeleteImg)
-
-    userInfoContainer.addEventListener('dragstart', handleDragStart);
-
-    specificDay.append(userInfoContainer)
-
-    
-}
+            //  specificDay = document.querySelectorAll('.box');
+            //  userInfoContainer = document.querySelectorAll('.small-box');
 
 
-function remove_div(){
+            userInfoContainer.append(imgEvent,textcont,contForDeleteImg)
+        
+            userInfoContainer.addEventListener('dragstart', handleDragStart);
+        
+            specificDay.append(userInfoContainer)
+        
+
+        }
+
+
+        function remove_div(){
     this.parentElement.parentElement.remove();
-  }
-// function edit(){
+          }
+        // function edit(){
 //     console.log(this.parentElement)
 //     let a = this.parentElement
 //     a.innerHTML =''
@@ -267,75 +278,75 @@ function remove_div(){
 //     a.append(b)
 //     b.value 
 //     a.append(b.value)
-// }
-
-let showForm = document.querySelectorAll('.showForm')
-
-
-
-showForm.forEach(element=>{
-    element.addEventListener('click',reveal)
-  })
-
-function reveal(element){
-    let popUpContainer = element.target.nextElementSibling;
-    const formsParentContainer = this.parentElement
-    let plusImagePopUp = element.target;
-    
-        // if(popUpContainer.style.display == 'unset'){
-        //     plusImagePopUp.style.display = ''
-        //     popUpContainer.style.display ='none' 
-        //     plusImagePopUp.style.display = ''
-        // } else {element.target.nextElementSibling.style.display == 'unset'
-        // // element.target.style.visibility = 'visible'
-        //     element.target.nextElementSibling.style.display  = 'unset'
-        //     element.target.style.display = 'unset'
         // }
-        if(popUpContainer.style.visibility == 'visible'){
+      
+        let showForm = document.querySelectorAll('.showForm')
+      
+      
+      
+        showForm.forEach(element=>{
+            element.addEventListener('click',reveal)
+          })
+      
+        function reveal(element){
+            let popUpContainer = element.target.nextElementSibling;
+            const formsParentContainer = this.parentElement
+            let plusImagePopUp = element.target;
 
-            plusImagePopUp.style.visibility = ''
-            formsParentContainer.style.visibility = ''
-            popUpContainer.style.visibility ='hidden' 
-            plusImagePopUp.style.visibility = ''
-        } else {element.target.nextElementSibling.style.visibility == 'hidden'
-        formsParentContainer.style.visibility = 'visible'
-            element.target.nextElementSibling.style.visibility  = 'visible'
-            element.target.style.visibility = 'visible'
-        }
-
-    }
-
-document.addEventListener('click', function handleClickOutsideBox(event) {
+                // if(popUpContainer.style.display == 'unset'){
+                //     plusImagePopUp.style.display = ''
+                //     popUpContainer.style.display ='none' 
+                //     plusImagePopUp.style.display = ''
+                // } else {element.target.nextElementSibling.style.display == 'unset'
+                // // element.target.style.visibility = 'visible'
+                //     element.target.nextElementSibling.style.display  = 'unset'
+                //     element.target.style.display = 'unset'
+                // }
+                if(popUpContainer.style.visibility == 'visible'){
+                
+                    plusImagePopUp.style.visibility = ''
+                    formsParentContainer.style.visibility = ''
+                    popUpContainer.style.visibility ='hidden' 
+                    plusImagePopUp.style.visibility = ''
+                } else {element.target.nextElementSibling.style.visibility == 'hidden'
+                formsParentContainer.style.visibility = 'visible'
+                    element.target.nextElementSibling.style.visibility  = 'visible'
+                    element.target.style.visibility = 'visible'
+                }
+            
+            }
+        
+        document.addEventListener('click', function handleClickOutsideBox(event) {
         // const form1 = document.querySelector('.form');
         
         // if (form1.style.visibility=='visible' && !form1.contains(event.target)) {
         //   form1.style.visibility = 'hidden';
         // }
-      });
-}
+              });
+        }
 
 
-function handleDragOver(e) {
+        function handleDragOver(e) {
     e.preventDefault();
-}
+        }
 
-function handleDrop(e) {
+        function handleDrop(e) {
     const id = e.dataTransfer.getData('text/plain');
     const currentlyDraggedBox = document.getElementById(id);
     console.log(typeof currentlyDraggedBox)
     e.target.append(currentlyDraggedBox);
- }
-
-function handleDragStart(e) {
+         }
+     
+        function handleDragStart(e) {
     e.dataTransfer.setData('text/plain', e.target.id);
-}
+        }
 
 
-newDates(month,year)
+        newDates(month,year)
 
-const cardContainerInDay = document.querySelectorAll('.contOfContForCard')
+        const cardContainerInDay = document.querySelectorAll('.contOfContForCard')
 
-cardContainerInDay.forEach((box) => {
+        cardContainerInDay.forEach((box) => {
     box.addEventListener('dragover', handleDragOver);
     box.addEventListener('drop', handleDrop);
-});
+        });
