@@ -140,7 +140,7 @@ function newDates(month,year){
         
         form.append(input,BdayPng,anniversaryPng)
         inputContainer.append(form)
-        formSpan.append(plusPng,form)
+        // formSpan.append(plusPng,form)
         td.append(cardContainerInDay,formSpan)
         tr.append(td)
         
@@ -229,7 +229,7 @@ function newDates(month,year){
             contForDeleteImg.classList.add('contForDelete')
             let deleteCard = document.createElement('img')
             deleteCard.classList.add('deleteCard')
-            deleteCard.src ='./Static/fill-4.png'
+            deleteCard.src ='./Static/x.png'
             deleteCard.addEventListener('click',remove_div)
             contForDeleteImg.append(deleteCard)
         
@@ -248,9 +248,6 @@ function newDates(month,year){
             imgOpen.style.visibility = ''
 
             // userInfoContainer.append(imgEvent,occasionTypeCont,userTextSpan,deleteCard)
-        
-        
-
             //  specificDay = document.querySelectorAll('.box');
             //  userInfoContainer = document.querySelectorAll('.small-box');
 
